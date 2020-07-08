@@ -16,7 +16,8 @@ module.exports = {
         changeOrigin: true,
         pathRewrite: {
           '^/convert': '/convert'
-        }
+        },
+        timeout: 6000000
       },
       '/elseIp': {
         target: 'http://182.83.19.15:8080',

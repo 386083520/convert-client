@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Message } from 'element-ui'
 const service = axios.create({
   baseURL: process.env.BASE_API,
-  timeout: 300 * 1000
+  timeout: 3000 * 1000
 })
 service.interceptors.request.use(config => {
   config.data = JSON.stringify(config.data)

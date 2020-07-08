@@ -17,7 +17,7 @@
         </el-col>
         <el-col :span="4" :xs="8">
           <div class="home-item">
-            <div class="home-item-img word2pdf"></div>
+            <div class="home-item-img word2pdf" @click="uploadFile('word2pdf')"></div>
             <div class="home-item-title">word转pdf</div>
           </div>
         </el-col>
@@ -28,7 +28,7 @@
           </div>
         </el-col>
         <el-col :span="4" :xs="8">
-          <div class="home-item">
+          <div class="home-item" @click="uploadFile('pdfCompress')">
             <div class="home-item-img pdfCompress"></div>
             <div class="home-item-title">pdf压缩</div>
           </div>
@@ -37,6 +37,14 @@
           <div class="home-item">
             <div class="home-item-img pdfMerge"></div>
             <div class="home-item-title">pdf合并</div>
+          </div>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="4" :xs="8">
+          <div class="home-item">
+            <div class="home-item-img word2pdf" @click="uploadFile('txt2pdf')"></div>
+            <div class="home-item-title">txt转pdf</div>
           </div>
         </el-col>
       </el-row>
