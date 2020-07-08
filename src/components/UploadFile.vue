@@ -84,7 +84,13 @@ export default {
         let params = {
           uuid: this.fileInfo.uuid
         }
-        let convertRes = await API.convertFile(params)
+        let convertRes
+        if (this.fileInfo.convertType === 'pdf2img') {
+          convertRes = await API.pdfToImg(params)
+        } else {
+          convertRes = await API.convertFile(params)
+        }
+
         if (convertRes.data.status === 1) {
           if (convertRes.data.body !== '') {
             this.uploadFileFinished = false
