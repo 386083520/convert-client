@@ -13,7 +13,7 @@
       multiple>
       <i class="el-icon-upload"></i>
       <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-      <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+      <div class="el-upload__tip" slot="tip">若转换异常请刷新重试</div>
     </el-upload>
     <div class="loading" v-else-if="transStates === '2'">
       <i class="loading-gif"></i>
@@ -26,6 +26,14 @@
       <div class="loaded-info">
         转换完成
       </div>
+    </div>
+    <div v-if="fileInfo.convertType === 'pdf2img' && uploadFileFinished">
+      输入希望转换的图片分辨率(10-600)
+      <el-input-number
+        v-model="resolutionValue"
+        :step="20"
+        size="small">
+      </el-input-number>
     </div>
     <div v-if="uploadFileFinished">
       <el-button @click="convertFile()">开始转换</el-button>
@@ -56,7 +64,8 @@ export default {
         uuid: '', // 标识本次上传的信息
         convertType: '' // 转换类型
       },
-      percent: 0
+      percent: 0,
+      resolutionValue: 100
     }
   },
   methods: {
@@ -86,8 +95,11 @@ export default {
         }
         let convertRes
         if (this.fileInfo.convertType === 'pdf2img') {
+          params['resolutionValue'] = this.resolutionValue + ''
           convertRes = await API.pdfToImg(params)
-        } else {
+        } else if(this.fileInfo.convertType === 'img2pdf') {
+
+        }else {
           convertRes = await API.convertFile(params)
         }
 

@@ -23,7 +23,7 @@
         </el-col>
         <el-col :span="4" :xs="8">
           <div class="home-item">
-            <div class="home-item-img img2pdf"></div>
+            <div class="home-item-img img2pdf" @click="uploadFile('img2pdf')"></div>
             <div class="home-item-title">图片转pdf</div>
           </div>
         </el-col>
