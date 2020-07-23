@@ -36,7 +36,7 @@
       </el-input-number>
     </div>
     <div v-if="uploadFileFinished">
-      <el-button @click="convertFile()">开始转换</el-button>
+      <el-button @click="convertFile()" :disabled="transStates === '2'">开始转换</el-button>
     </div>
     <div v-if="downloadFileFinished">
       <el-button @click="downloadFile()">开始下载</el-button>
@@ -97,12 +97,32 @@ export default {
         if (this.fileInfo.convertType === 'pdf2img') {
           params['resolutionValue'] = this.resolutionValue + ''
           convertRes = await API.pdfToImg(params)
-        } else if(this.fileInfo.convertType === 'img2pdf') {
-
-        }else {
+        } else if (this.fileInfo.convertType === 'img2pdf') {
+        } else if (this.fileInfo.convertType === 'txt2pdf') {
+          params['fileType'] = 'pdf'
+          convertRes = await API.convertFile(params)
+        } else if (this.fileInfo.convertType === 'excel2pdf') {
+          params['fileType'] = 'pdf'
+          convertRes = await API.convertFile(params)
+        } else if (this.fileInfo.convertType === 'word2html') {
+          params['fileType'] = 'html'
+          convertRes = await API.convertFile(params)
+        } else if (this.fileInfo.convertType === 'excel2html') {
+          params['fileType'] = 'html'
+          convertRes = await API.convertFile(params)
+        } else if (this.fileInfo.convertType === 'html2word') {
+          params['fileType'] = 'doc'
+          convertRes = await API.convertFile(params)
+        } else if (this.fileInfo.convertType === 'html2pdf') {
+          params['fileType'] = 'pdf'
+          convertRes = await API.convertFile(params)
+        } else if(this.fileInfo.convertType === 'pdf2word') {
+          params['fileType'] = 'docx'
+          convertRes = await API.convertFile(params)
+        } else if(this.fileInfo.convertType === 'img2txt') {
+          params['fileType'] = 'txt'
           convertRes = await API.convertFile(params)
         }
-
         if (convertRes.data.status === 1) {
           if (convertRes.data.body !== '') {
             this.uploadFileFinished = false
