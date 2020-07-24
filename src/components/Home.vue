@@ -109,6 +109,14 @@
             <div class="home-item-title">图片转文本</div>
           </div>
         </el-col>
+        <el-col :span="4" :xs="8">
+          <div class="home-item" @click="uploadFile('removePage')" title="图片转文本">
+            <svg class="home-item-img icon" aria-hidden="true">
+              <use xlink:href="#icon-wenben"></use>
+            </svg>
+            <div class="home-item-title">pdf去除指定页</div>
+          </div>
+        </el-col>
       </el-row>
     </div>
   </div>

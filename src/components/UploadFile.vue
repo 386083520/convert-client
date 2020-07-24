@@ -116,11 +116,14 @@ export default {
         } else if (this.fileInfo.convertType === 'html2pdf') {
           params['fileType'] = 'pdf'
           convertRes = await API.convertFile(params)
-        } else if(this.fileInfo.convertType === 'pdf2word') {
+        } else if (this.fileInfo.convertType === 'pdf2word') {
           params['fileType'] = 'docx'
           convertRes = await API.convertFile(params)
-        } else if(this.fileInfo.convertType === 'img2txt') {
+        } else if (this.fileInfo.convertType === 'img2txt') {
           params['fileType'] = 'txt'
+          convertRes = await API.convertFile(params)
+        } else if (this.fileInfo.convertType === 'removePage') {
+          params['fileType'] = 'pdf'
           convertRes = await API.convertFile(params)
         }
         if (convertRes.data.status === 1) {
