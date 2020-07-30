@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "9396320",
+      "name": "ic_去除重复记录",
+      "font_class": "ic_quchuzhongfujilu",
+      "unicode": "e685",
+      "unicode_decimal": 59013
+    },
+    {
       "icon_id": "2475465",
       "name": "word",
       "font_class": "word",

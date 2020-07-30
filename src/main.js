@@ -6,6 +6,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import App from './App'
 import router from './router'
 import './assets/icon/iconfont.css'
+import VueWechatTitle from 'vue-wechat-title'
+Vue.use(VueWechatTitle)
 
 Vue.config.productionTip = false
 

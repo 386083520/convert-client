@@ -3,7 +3,7 @@
     <div class="home-title">在线转换工具</div>
     <div class="home-content">
       <el-row>
-        <el-col :span="4" :xs="8">
+        <el-col :span="4" :xs="12">
           <div class="home-item" @click="uploadFile('pdf2img')" title="pdf转图片">
             <svg class="home-item-img icon" aria-hidden="true">
               <use xlink:href="#icon-zhuanPDF"></use>
@@ -11,7 +11,7 @@
             <div class="home-item-title">pdf转图片</div>
           </div>
         </el-col>
-        <el-col :span="4" :xs="8">
+        <el-col :span="4" :xs="12">
           <div class="home-item" @click="uploadFile('pdf2word')" title="pdf转word">
             <svg class="home-item-img icon" aria-hidden="true">
               <use xlink:href="#icon-fbpdfzhuanword"></use>
@@ -19,7 +19,7 @@
             <div class="home-item-title">pdf转word</div>
           </div>
         </el-col>
-        <el-col :span="4" :xs="8">
+        <el-col :span="4" :xs="12">
           <div class="home-item" @click="uploadFile('word2pdf')" title="word转pdf">
             <svg class="home-item-img icon" aria-hidden="true">
               <use xlink:href="#icon-wordzhuanPDF"></use>
@@ -27,7 +27,7 @@
             <div class="home-item-title">word转pdf</div>
           </div>
         </el-col>
-        <el-col :span="4" :xs="8">
+        <el-col :span="4" :xs="12">
           <div class="home-item" @click="uploadFile('img2pdf')" title="图片转pdf">
             <svg class="home-item-img icon" aria-hidden="true">
               <use xlink:href="#icon-pdf"></use>
@@ -35,7 +35,7 @@
             <div class="home-item-title">图片转pdf</div>
           </div>
         </el-col>
-        <el-col :span="4" :xs="8">
+        <el-col :span="4" :xs="12">
           <div class="home-item" @click="uploadFile('pdfCompress')" title="pdf压缩">
             <svg class="home-item-img icon" aria-hidden="true">
               <use xlink:href="#icon-PDFyasuo"></use>
@@ -43,7 +43,7 @@
             <div class="home-item-title">pdf压缩</div>
           </div>
         </el-col>
-        <el-col :span="4" :xs="8">
+        <el-col :span="4" :xs="12">
           <div class="home-item" title="pdf合并">
             <svg class="home-item-img icon" aria-hidden="true">
               <use xlink:href="#icon-PDFhebing"></use>
@@ -51,7 +51,7 @@
             <div class="home-item-title">pdf合并</div>
           </div>
         </el-col>
-        <el-col :span="4" :xs="8">
+        <el-col :span="4" :xs="12">
           <div class="home-item" @click="uploadFile('excel2pdf')" title="excel转pdf">
             <svg class="home-item-img icon" aria-hidden="true">
               <use xlink:href="#icon-PDF_"></use>
@@ -59,7 +59,7 @@
             <div class="home-item-title">excel转pdf</div>
           </div>
         </el-col>
-        <el-col :span="4" :xs="8">
+        <el-col :span="4" :xs="12">
           <div class="home-item" @click="uploadFile('txt2pdf')" title="txt转pdf">
             <svg class="home-item-img icon" aria-hidden="true">
               <use xlink:href="#icon-pdf"></use>
@@ -67,7 +67,7 @@
             <div class="home-item-title">txt转pdf</div>
           </div>
         </el-col>
-        <el-col :span="4" :xs="8">
+        <el-col :span="4" :xs="12">
           <div class="home-item" @click="uploadFile('word2html')" title="word转html">
             <svg class="home-item-img icon" aria-hidden="true">
               <use xlink:href="#icon-html"></use>
@@ -75,7 +75,7 @@
             <div class="home-item-title">word转html</div>
           </div>
         </el-col>
-        <el-col :span="4" :xs="8">
+        <el-col :span="4" :xs="12">
           <div class="home-item" @click="uploadFile('excel2html')" title="excel转html">
             <svg class="home-item-img icon" aria-hidden="true">
               <use xlink:href="#icon-HTML"></use>
@@ -83,7 +83,7 @@
             <div class="home-item-title">excel转html</div>
           </div>
         </el-col>
-        <el-col :span="4" :xs="8">
+        <el-col :span="4" :xs="12">
           <div class="home-item" @click="uploadFile('html2word')" title="html转word">
             <svg class="home-item-img icon" aria-hidden="true">
               <use xlink:href="#icon-word"></use>
@@ -91,7 +91,7 @@
             <div class="home-item-title">html转word</div>
           </div>
         </el-col>
-        <el-col :span="4" :xs="8">
+        <el-col :span="4" :xs="12">
           <div class="home-item" @click="uploadFile('html2pdf')" title="html转pdf">
             <svg class="home-item-img icon" aria-hidden="true">
               <use xlink:href="#icon-pdf1"></use>
@@ -101,7 +101,7 @@
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span="4" :xs="8">
+        <el-col :span="4" :xs="12">
           <div class="home-item" @click="uploadFile('img2txt')" title="图片转文本">
             <svg class="home-item-img icon" aria-hidden="true">
               <use xlink:href="#icon-wenben"></use>
@@ -109,10 +109,10 @@
             <div class="home-item-title">图片转文本</div>
           </div>
         </el-col>
-        <el-col :span="4" :xs="8">
+        <el-col :span="4" :xs="12">
           <div class="home-item" @click="uploadFile('removePage')" title="图片转文本">
             <svg class="home-item-img icon" aria-hidden="true">
-              <use xlink:href="#icon-wenben"></use>
+              <use xlink:href="#icon-ic_quchuzhongfujilu"></use>
             </svg>
             <div class="home-item-title">pdf去除指定页</div>
           </div>

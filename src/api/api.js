@@ -8,6 +8,9 @@ export default{
   pdfToImg (params) {
     return http.post(`${CONFIG.PDF_IMG}`, params)
   },
+  proposeApi (params) {
+    return http.post(`${CONFIG.PROPOSE}`, params)
+  },
   postFormAPI (params) {
     return http.post(`${CONFIG.LOGIN}`, params)
   }

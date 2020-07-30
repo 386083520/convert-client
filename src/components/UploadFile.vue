@@ -1,7 +1,7 @@
 <template>
   <div class="upload-file">
     <div class="upload-file-title">
-      文件上传转换
+      {{convertName}}
     </div>
     <el-upload
       v-if="transStates === '1'"
@@ -10,10 +10,12 @@
       :action="filePath"
       :data="fileInfo"
       :on-success="uploadSuccess"
-      multiple>
+      :multiple = "allowMultiple"
+      :limit = "limitFile">
       <i class="el-icon-upload"></i>
       <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
       <div class="el-upload__tip" slot="tip">若转换异常请刷新重试</div>
+      <div class="el-upload__tip" slot="tip">{{convertTips}}</div>
     </el-upload>
     <div class="loading" v-else-if="transStates === '2'">
       <i class="loading-gif"></i>
@@ -41,6 +43,19 @@
     <div v-if="downloadFileFinished">
       <el-button @click="downloadFile()">开始下载</el-button>
     </div>
+    <div style="width: 60%;margin: 0 auto">
+      <el-input
+        style="margin-top: 160px"
+        type="textarea"
+        :rows="6"
+        placeholder="在使用过程中遇到问题，希望拥有的转换功能，或其他好的改善建议都可在此留言"
+        v-model="problemText">
+      </el-input>
+      <div style="text-align: right;margin-top: 10px">
+        <el-button @click="submitPropose">提交</el-button>
+      </div>
+    </div>
+    <div style="margin-top: 20px">作者：上官墨涵 386083520@qq.com</div>
   </div>
 </template>
 
@@ -51,8 +66,92 @@ export default {
   name: 'UploadFile',
   mounted () {
     console.log('gsd', this.$route.query.type)
-    this.fileInfo.convertType = this.$route.query.type
+    let getConvertType = this.$route.query.type
+    this.fileInfo.convertType = getConvertType
     this.fileInfo.uuid = this.genUuid()
+    if (getConvertType === 'pdf2img') {
+      this.convertName = 'pdf转图片'
+      this.convertTips = '只能上传单份pdf'
+      this.allowMultiple = false
+      this.limitFile = 1
+    }
+    if (getConvertType === 'img2pdf') {
+      this.convertName = '图片转pdf'
+      this.convertTips = '将上传的多张图片转化为pdf，可同时上传多张图片'
+      this.allowMultiple = true
+      this.limitFile = 100
+    }
+    if (getConvertType === 'excel2pdf') {
+      this.convertName = 'excel转pdf'
+      this.convertTips = '只能上传单份excel文件'
+      this.allowMultiple = false
+      this.limitFile = 1
+    }
+    if (getConvertType === 'word2html') {
+      this.convertName = 'word转html'
+      this.convertTips = '只能上传单份word文件'
+      this.allowMultiple = false
+      this.limitFile = 1
+    }
+    if (getConvertType === 'excel2html') {
+      this.convertName = 'excel转html'
+      this.convertTips = '只能上传单份excel文件'
+      this.allowMultiple = false
+      this.limitFile = 1
+    }
+    if (getConvertType === 'txt2pdf') {
+      this.convertName = 'txt转pdf'
+      this.convertTips = '只能上传单份txt文件'
+      this.allowMultiple = false
+      this.limitFile = 1
+    }
+    if (getConvertType === 'html2word') {
+      this.convertName = 'html转word'
+      this.convertTips = '只能上传单份html文件,只适用于文本类型的html转换'
+      this.allowMultiple = false
+      this.limitFile = 1
+    }
+    if (getConvertType === 'html2pdf') {
+      this.convertName = 'html转pdf'
+      this.convertTips = '只能上传单份html文件,只适用于文本类型的html转换'
+      this.allowMultiple = false
+      this.limitFile = 1
+    }
+    if (getConvertType === 'pdf2word') {
+      this.convertName = 'pdf转word'
+      this.convertTips = '只能上传单份pdf文件'
+      this.allowMultiple = false
+      this.limitFile = 1
+    }
+    if (getConvertType === 'img2txt') {
+      this.convertName = 'img转txt'
+      this.convertTips = '只能上传单份图片文件'
+      this.allowMultiple = false
+      this.limitFile = 1
+    }
+    if (getConvertType === 'pdf2word') {
+      this.convertName = 'pdf转word'
+      this.convertTips = '只能上传单份pdf文件，大文件的转换时间较长，请耐心等待'
+      this.allowMultiple = false
+      this.limitFile = 1
+    }
+    if (getConvertType === 'removePage') {
+      this.convertName = 'pdf去除指定页'
+      this.allowMultiple = false
+      this.limitFile = 1
+    }
+    if (getConvertType === 'word2pdf') {
+      this.convertName = 'word转pdf'
+      this.convertTips = '只能上传单份word文件'
+      this.allowMultiple = false
+      this.limitFile = 1
+    }
+    if (getConvertType === 'pdfCompress') {
+      this.convertName = 'pdf压缩'
+      this.convertTips = '只能上传单份pdf文件'
+      this.allowMultiple = false
+      this.limitFile = 1
+    }
   },
   data () {
     return {
@@ -65,7 +164,12 @@ export default {
         convertType: '' // 转换类型
       },
       percent: 0,
-      resolutionValue: 100
+      resolutionValue: 100,
+      convertName: '文件上传转换',
+      convertTips: '',
+      allowMultiple: false,
+      limitFile: 1,
+      problemText: ''
     }
   },
   methods: {
@@ -85,6 +189,19 @@ export default {
       s[8] = s[13] = s[18] = s[23] = '-'
       this.uuidA = s.join('')
       return this.uuidA
+    },
+    async submitPropose () {
+      if (this.problemText === '') {
+        this.$message.warning('内容不能为空')
+        return
+      }
+      let params = {
+        textInfo: this.problemText
+      }
+      let proposeRes = await API.proposeApi(params)
+      if (proposeRes.data.status === 1) {
+        this.$message.success('反馈成功')
+      }
     },
     async convertFile () {
       this.transStates = '2'
@@ -123,6 +240,12 @@ export default {
           params['fileType'] = 'txt'
           convertRes = await API.convertFile(params)
         } else if (this.fileInfo.convertType === 'removePage') {
+          params['fileType'] = 'pdf'
+          convertRes = await API.convertFile(params)
+        } else if (this.fileInfo.convertType === 'word2pdf') {
+          params['fileType'] = 'pdf'
+          convertRes = await API.convertFile(params)
+        } else if (this.fileInfo.convertType === 'pdfCompress') {
           params['fileType'] = 'pdf'
           convertRes = await API.convertFile(params)
         }
@@ -168,7 +291,7 @@ export default {
         width: 80px;
         height: 80px;
         display: inline-block;
-        background: url("../assets/progress_convert.gif") no-repeat center;
+        background: url("../assets/loading.gif") no-repeat center;
       }
       .loading-info {
         margin-bottom: 20px;

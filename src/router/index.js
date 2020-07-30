@@ -8,14 +8,20 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/home',
+      path: '/',
       name: 'Home',
-      component: Home
+      component: Home,
+      meta: {
+        title: '文档在线转换'
+      }
     },
     {
       path: '/uploadFile',
       name: 'UploadFile',
-      component: UploadFile
+      component: UploadFile,
+      meta: {
+        title: '文档在线转换'
+      }
     }
   ]
 })
