@@ -13,5 +13,8 @@ export default{
   },
   postFormAPI (params) {
     return http.post(`${CONFIG.LOGIN}`, params)
+  },
+  mergeFile (params) {
+    return http.post(`${CONFIG.MERGE_FILE}`, params)
   }
 }

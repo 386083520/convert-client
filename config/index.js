@@ -12,24 +12,17 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/convert': {
-        target: 'http://39.106.131.158:8089',
+        target: 'http://127.0.0.1:8089',
         changeOrigin: true,
         pathRewrite: {
           '^/convert': '/convert'
         },
         timeout: 6000000
-      },
-      '/elseIp': {
-        target: 'http://182.83.19.15:8080',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/esleIp': ''
-        }
       }
     },
 
     // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
+    host: '0.0.0.0', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,

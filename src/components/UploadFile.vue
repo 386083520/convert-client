@@ -3,20 +3,13 @@
     <div class="upload-file-title">
       {{convertName}}
     </div>
-    <el-upload
-      v-if="transStates === '1'"
-      class="upload-input"
-      drag
-      :action="filePath"
-      :data="fileInfo"
-      :on-success="uploadSuccess"
-      :multiple = "allowMultiple"
-      :limit = "limitFile">
-      <i class="el-icon-upload"></i>
-      <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-      <div class="el-upload__tip" slot="tip">若转换异常请刷新重试</div>
-      <div class="el-upload__tip" slot="tip">{{convertTips}}</div>
-    </el-upload>
+    <media-file-uploader
+      v-if="transStates === '1' && fileInfo.uuid"
+      style="margin: 0 auto"
+      :fileUploadParams="fileUploadParams"
+      :uuid="fileInfo.uuid"
+      @uploadSuccess="uploadChunkSuccess">
+    </media-file-uploader>
     <div class="loading" v-else-if="transStates === '2'">
       <i class="loading-gif"></i>
       <div class="loading-info">
@@ -60,10 +53,15 @@
 </template>
 
 <script>
+import MediaFileUploader from './MediaFileUploader'
 import CONFIG from '@/api/config.js'
 import API from '@/api/api.js'
+import $ from 'jquery'
 export default {
   name: 'UploadFile',
+  components: {
+    MediaFileUploader
+  },
   mounted () {
     console.log('gsd', this.$route.query.type)
     let getConvertType = this.$route.query.type
@@ -155,6 +153,15 @@ export default {
   },
   data () {
     return {
+      fileUploadParams: {
+        uploadUrl: CONFIG.CHUNK_UPLOAD_FILE,
+        chunked: true,
+        accept: {
+          title: 'Files',
+          extensions: '*',
+          mimeTypes: '*'
+        }
+      },
       filePath: CONFIG.UPLOAD_FILE,
       uploadFileFinished: false,
       downloadFileFinished: false,
@@ -173,6 +180,22 @@ export default {
     }
   },
   methods: {
+    uploadChunkSuccess (file, ccurrentChunk, response, uploader) {
+      this.mergeChunks(file)
+    },
+    async mergeChunks (file) {
+      let params = {
+        'uuid': this.fileInfo.uuid,
+        'fileName': file.name,
+        'convertType': this.fileInfo.convertType
+      }
+      let proposeRes = await API.mergeFile(params)
+      if (proposeRes.data.status === 1) {
+        $('#' + file.id).find('.media-detail .process-percentage').text('').removeClass('merge-loading').addClass('success')
+        this.uploadFileFinished = true
+        this.$message.success('文件合并成功')
+      }
+    },
     uploadSuccess (response, file, fileList) {
       if (response.status === 1) {
         this.uploadFileFinished = true
