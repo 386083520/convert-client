@@ -8,6 +8,7 @@
       style="margin: 0 auto"
       :fileUploadParams="fileUploadParams"
       :uuid="fileInfo.uuid"
+      :convertTips="convertTips"
       @uploadSuccess="uploadChunkSuccess">
     </media-file-uploader>
     <div class="loading" v-else-if="transStates === '2'">
@@ -69,86 +70,99 @@ export default {
     this.fileInfo.uuid = this.genUuid()
     if (getConvertType === 'pdf2img') {
       this.convertName = 'pdf转图片'
-      this.convertTips = '只能上传单份pdf'
+      this.convertTips = '只能传单份pdf,上传多份先上传的将被覆盖'
       this.allowMultiple = false
       this.limitFile = 1
+      this.fileUploadParams.accept = this.pdfType
     }
     if (getConvertType === 'img2pdf') {
       this.convertName = '图片转pdf'
       this.convertTips = '将上传的多张图片转化为pdf，可同时上传多张图片'
       this.allowMultiple = true
       this.limitFile = 100
+      this.fileUploadParams.accept = this.imageType
     }
     if (getConvertType === 'excel2pdf') {
       this.convertName = 'excel转pdf'
-      this.convertTips = '只能上传单份excel文件'
+      this.convertTips = '只能上传单份excel文件,上传多份先上传的将被覆盖'
       this.allowMultiple = false
       this.limitFile = 1
     }
     if (getConvertType === 'word2html') {
       this.convertName = 'word转html'
-      this.convertTips = '只能上传单份word文件'
+      this.convertTips = '只能上传单份word文件,上传多份先上传的将被覆盖'
       this.allowMultiple = false
       this.limitFile = 1
+      this.fileUploadParams.accept = this.wordType
     }
     if (getConvertType === 'excel2html') {
       this.convertName = 'excel转html'
-      this.convertTips = '只能上传单份excel文件'
+      this.convertTips = '只能上传单份excel文件,上传多份先上传的将被覆盖'
       this.allowMultiple = false
       this.limitFile = 1
+      this.fileUploadParams.accept = this.excelType
     }
     if (getConvertType === 'txt2pdf') {
       this.convertName = 'txt转pdf'
-      this.convertTips = '只能上传单份txt文件'
+      this.convertTips = '只能上传单份txt文件,上传多份先上传的将被覆盖'
       this.allowMultiple = false
       this.limitFile = 1
+      this.fileUploadParams.accept = this.txtType
     }
     if (getConvertType === 'html2word') {
       this.convertName = 'html转word'
-      this.convertTips = '只能上传单份html文件,只适用于文本类型的html转换'
+      this.convertTips = '只能上传单份html文件,只适用于文本类型的html转换,上传多份先上传的将被覆盖'
       this.allowMultiple = false
       this.limitFile = 1
+      this.fileUploadParams.accept = this.htmlType
     }
     if (getConvertType === 'html2pdf') {
       this.convertName = 'html转pdf'
-      this.convertTips = '只能上传单份html文件,只适用于文本类型的html转换'
+      this.convertTips = '只能上传单份html文件,只适用于文本类型的html转换,上传多份先上传的将被覆盖'
       this.allowMultiple = false
       this.limitFile = 1
+      this.fileUploadParams.accept = this.htmlType
     }
     if (getConvertType === 'pdf2word') {
       this.convertName = 'pdf转word'
-      this.convertTips = '只能上传单份pdf文件'
+      this.convertTips = '只能上传单份pdf文件,上传多份先上传的将被覆盖'
       this.allowMultiple = false
       this.limitFile = 1
+      this.fileUploadParams.accept = this.pdfType
     }
     if (getConvertType === 'img2txt') {
       this.convertName = 'img转txt'
-      this.convertTips = '只能上传单份图片文件'
+      this.convertTips = '只能上传单份图片文件,上传多份先上传的将被覆盖'
       this.allowMultiple = false
       this.limitFile = 1
+      this.fileUploadParams.accept = this.imageType
     }
     if (getConvertType === 'pdf2word') {
       this.convertName = 'pdf转word'
-      this.convertTips = '只能上传单份pdf文件，大文件的转换时间较长，请耐心等待'
+      this.convertTips = '只能上传单份pdf文件,上传多份先上传的将被覆盖，大文件的转换时间较长，请耐心等待'
       this.allowMultiple = false
       this.limitFile = 1
+      this.fileUploadParams.accept = this.pdfType
     }
     if (getConvertType === 'removePage') {
       this.convertName = 'pdf去除指定页'
       this.allowMultiple = false
       this.limitFile = 1
+      this.fileUploadParams.accept = this.pdfType
     }
     if (getConvertType === 'word2pdf') {
       this.convertName = 'word转pdf'
       this.convertTips = '只能上传单份word文件'
       this.allowMultiple = false
       this.limitFile = 1
+      this.fileUploadParams.accept = this.wordType
     }
     if (getConvertType === 'pdfCompress') {
       this.convertName = 'pdf压缩'
       this.convertTips = '只能上传单份pdf文件'
       this.allowMultiple = false
       this.limitFile = 1
+      this.fileUploadParams.accept = this.pdfType
     }
   },
   data () {
@@ -176,7 +190,37 @@ export default {
       convertTips: '',
       allowMultiple: false,
       limitFile: 1,
-      problemText: ''
+      problemText: '',
+      imageType: {
+        title: 'Images',
+        extensions: 'gif,jpg,jpeg,bmp,png',
+        mimeTypes: 'image/*'
+      },
+      pdfType: {
+        title: 'Pdf',
+        extensions: 'pdf',
+        mimeTypes: 'application/pdf'
+      },
+      wordType: {
+        title: 'word',
+        extensions: 'doc,docx',
+        mimeTypes: 'application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      },
+      htmlType: {
+        title: 'html',
+        extensions: 'htm,html',
+        mimeTypes: 'text/html'
+      },
+      txtType: {
+        title: 'txt',
+        extensions: 'txt',
+        mimeTypes: 'text/plain'
+      },
+      excelType: {
+        title: 'excel',
+        extensions: 'xls,xlsx',
+        mimeTypes: 'application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      }
     }
   },
   methods: {

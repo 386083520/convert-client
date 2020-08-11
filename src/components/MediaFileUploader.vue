@@ -5,7 +5,7 @@
          <use xlink:href="#icon-shangchuan"></use>
        </svg>
        <p>将文件拖到此处或<span id="upload-btn" class="upload-btn">点击上传</span></p>
-       <div class="upload-tip">单次添加文件数量不超过1个，总大小不超过2g</div>
+       <marquee scrollamount="2"><div class="upload-tip">{{convertTips}}</div></marquee>
      </div>
     <div class="upload-progress" id="fileList">
     </div>
@@ -21,7 +21,8 @@ export default {
     fileUploadParams: {
       type: Object
     },
-    uuid: ''
+    uuid: '',
+    convertTips: ''
   },
   mounted () {
     this.$nextTick(() => {
@@ -146,7 +147,7 @@ export default {
 
   .file-upload-wrp {
     font-size: 14px;
-    width: 400px;
+    width: 60%;
     border: 1px dashed #c0ccda;
     padding: 30px;
     .ready-upload {
