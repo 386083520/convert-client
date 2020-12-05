@@ -13,9 +13,11 @@
   "dependencies": {
     "axios": "^0.19.2",
     "element-ui": "^2.13.2",
+    "jquery": "^3.5.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
-    "vue-wechat-title": "^2.0.7"
+    "vue-wechat-title": "^2.0.7",
+    "webuploader": "^0.1.8"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

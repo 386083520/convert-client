@@ -16,5 +16,8 @@ export default{
   },
   mergeFile (params) {
     return http.post(`${CONFIG.MERGE_FILE}`, params)
+  },
+  getImageUrl (params) {
+    return http.get(`${CONFIG.GET_IMAGE_URL}/${params.uuid}`)
   }
 }

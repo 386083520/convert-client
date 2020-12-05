@@ -28,27 +28,11 @@
           </div>
         </el-col>
         <el-col :span="4" :xs="12">
-          <div class="home-item" @click="uploadFile('img2pdf')" title="图片转pdf">
-            <svg class="home-item-img icon" aria-hidden="true">
-              <use xlink:href="#icon-pdf"></use>
-            </svg>
-            <div class="home-item-title">图片转pdf</div>
-          </div>
-        </el-col>
-        <el-col :span="4" :xs="12">
           <div class="home-item" @click="uploadFile('pdfCompress')" title="pdf压缩">
             <svg class="home-item-img icon" aria-hidden="true">
               <use xlink:href="#icon-PDFyasuo"></use>
             </svg>
             <div class="home-item-title">pdf压缩</div>
-          </div>
-        </el-col>
-        <el-col :span="4" :xs="12">
-          <div class="home-item" title="pdf合并">
-            <svg class="home-item-img icon" aria-hidden="true">
-              <use xlink:href="#icon-PDFhebing"></use>
-            </svg>
-            <div class="home-item-title">pdf合并</div>
           </div>
         </el-col>
         <el-col :span="4" :xs="12">
@@ -99,8 +83,6 @@
             <div class="home-item-title">html转pdf</div>
           </div>
         </el-col>
-      </el-row>
-      <el-row>
         <el-col :span="4" :xs="12">
           <div class="home-item" @click="uploadFile('img2txt')" title="图片转文本">
             <svg class="home-item-img icon" aria-hidden="true">
@@ -110,11 +92,37 @@
           </div>
         </el-col>
         <el-col :span="4" :xs="12">
+          <div class="home-item" @click="uploadFile('img2txtonline')" title="双层图片">
+            <svg class="home-item-img icon" aria-hidden="true">
+              <use xlink:href="#icon-wenben1"></use>
+            </svg>
+            <div class="home-item-title">双层图片</div>
+          </div>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="4" :xs="12" v-if="false">
           <div class="home-item" @click="uploadFile('removePage')" title="图片转文本">
             <svg class="home-item-img icon" aria-hidden="true">
               <use xlink:href="#icon-ic_quchuzhongfujilu"></use>
             </svg>
             <div class="home-item-title">pdf去除指定页</div>
+          </div>
+        </el-col>
+        <el-col :span="4" :xs="12" v-if="false">
+          <div class="home-item" title="pdf合并">
+            <svg class="home-item-img icon" aria-hidden="true">
+              <use xlink:href="#icon-PDFhebing"></use>
+            </svg>
+            <div class="home-item-title">pdf合并</div>
+          </div>
+        </el-col>
+        <el-col :span="4" :xs="12" v-if="false">
+          <div class="home-item" @click="uploadFile('img2pdf')" title="图片转pdf">
+            <svg class="home-item-img icon" aria-hidden="true">
+              <use xlink:href="#icon-pdf"></use>
+            </svg>
+            <div class="home-item-title">图片转pdf</div>
           </div>
         </el-col>
       </el-row>

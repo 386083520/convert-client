@@ -7,5 +7,7 @@ export default {
   DOWNLOAD_FILE: CONTEXTPATH + '/download/downloadFile',
   PROPOSE: CONTEXTPATH + '/convert/propose',
   CHUNK_UPLOAD_FILE: CONTEXTPATH + '/chunkfile/chunkupload',
-  MERGE_FILE: CONTEXTPATH + '/chunkfile/mergeFile'
+  MERGE_FILE: CONTEXTPATH + '/chunkfile/mergeFile',
+  GET_IMAGE_URL: CONTEXTPATH + '/imageLayer/getImageUrl',
+  FASTDFS_URL: '/config.json'
 }

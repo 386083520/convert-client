@@ -49,7 +49,7 @@
         <el-button @click="submitPropose">提交</el-button>
       </div>
     </div>
-    <div style="margin-top: 20px">作者：上官墨涵 386083520@qq.com</div>
+    <div style="margin-top: 20px">作者：上官墨涵 15871817846</div>
   </div>
 </template>
 
@@ -87,6 +87,7 @@ export default {
       this.convertTips = '只能上传单份excel文件,上传多份先上传的将被覆盖'
       this.allowMultiple = false
       this.limitFile = 1
+      this.fileUploadParams.accept = this.excelType
     }
     if (getConvertType === 'word2html') {
       this.convertName = 'word转html'
@@ -164,6 +165,13 @@ export default {
       this.limitFile = 1
       this.fileUploadParams.accept = this.pdfType
     }
+    if (getConvertType === 'img2txtonline') {
+      this.convertName = '双层图片'
+      this.convertTips = '只能上传单份pdf文件'
+      this.allowMultiple = false
+      this.limitFile = 1
+      this.fileUploadParams.accept = this.imageType
+    }
   },
   data () {
     return {
@@ -193,8 +201,8 @@ export default {
       problemText: '',
       imageType: {
         title: 'Images',
-        extensions: 'gif,jpg,jpeg,bmp,png',
-        mimeTypes: 'image/*'
+        extensions: 'gif,jpg,jpeg,bmp,png,tif,tiff,webp',
+        mimeTypes: 'image/jpeg,image/gif,image/bmp,image/png,image/svg+xml,image/tiff,image/webp'
       },
       pdfType: {
         title: 'Pdf',
@@ -238,6 +246,9 @@ export default {
         $('#' + file.id).find('.media-detail .process-percentage').text('').removeClass('merge-loading').addClass('success')
         this.uploadFileFinished = true
         this.$message.success('文件合并成功')
+        if (this.fileInfo.convertType === 'img2txtonline') {
+          this.$router.push({ name: 'imageLayer', params: {uuid: this.fileInfo.uuid} })
+        }
       }
     },
     uploadSuccess (response, file, fileList) {
@@ -315,6 +326,8 @@ export default {
         } else if (this.fileInfo.convertType === 'pdfCompress') {
           params['fileType'] = 'pdf'
           convertRes = await API.convertFile(params)
+        } else if (this.fileInfo.convertType === 'img2txtonline') {
+          convertRes = await API.convertFile(params)
         }
         if (convertRes.data.status === 1) {
           if (convertRes.data.body !== '') {
@@ -323,9 +336,11 @@ export default {
             this.transStates = '3'
             this.$message.success('转换文件成功，总耗时：' + convertRes.data.body + '（s）')
           } else {
+            this.transStates = '1'
             this.$message.error('转换文件异常')
           }
         } else {
+          this.transStates = '1'
           this.$message.error('转换文件异常')
         }
       }

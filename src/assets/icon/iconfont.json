@@ -6,6 +6,34 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "13362450",
+      "name": "扫描管理",
+      "font_class": "saomiaoguanli",
+      "unicode": "e67f",
+      "unicode_decimal": 59007
+    },
+    {
+      "icon_id": "14063285",
+      "name": "文本",
+      "font_class": "wenben1",
+      "unicode": "e638",
+      "unicode_decimal": 58936
+    },
+    {
+      "icon_id": "3207723",
+      "name": "睁眼",
+      "font_class": "icon-eye-open",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "3207724",
+      "name": "闭眼",
+      "font_class": "icon-eye-close",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
       "icon_id": "7674533",
       "name": "完成",
       "font_class": "wancheng",

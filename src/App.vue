@@ -9,6 +9,21 @@ export default {
   name: 'App'
 }
 </script>
-
 <style>
+  #app {
+    width: 100%;
+    height: 100%;
+  }
+  body {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding: 0px;
+    margin: 0px;
+  }
+  html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
 </style>
