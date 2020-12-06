@@ -9,5 +9,6 @@ export default {
   CHUNK_UPLOAD_FILE: CONTEXTPATH + '/chunkfile/chunkupload',
   MERGE_FILE: CONTEXTPATH + '/chunkfile/mergeFile',
   GET_IMAGE_URL: CONTEXTPATH + '/imageLayer/getImageUrl',
+  GET_OCR_RESULT: CONTEXTPATH + '/imageLayer/getOcrResult',
   FASTDFS_URL: '/config.json'
 }

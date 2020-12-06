@@ -19,5 +19,8 @@ export default{
   },
   getImageUrl (params) {
     return http.get(`${CONFIG.GET_IMAGE_URL}/${params.uuid}`)
+  },
+  getOcrResultApi (params) {
+    return http.get(`${CONFIG.GET_OCR_RESULT}/${params.id}`)
   }
 }
